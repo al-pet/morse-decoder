@@ -39,6 +39,23 @@ const MORSE_TABLE = {
 
 function decode(expr) {
     // write your solution here
+ 
+  let result = "";
+  let key = "";
+  for (let i = 0; i < expr.length; i = i + 10) {
+    const decade = expr.slice(i, i + 10).replace(/^0+/, "");
+    if (decade[0] === "*") {
+      result = result + " ";
+    } else {
+        let key = "";  
+        for (let i = 0; i < decade.length; i = i + 2) {
+          key += decade.slice(i, i + 2) === "10" ? "." : "-";
+        }
+      result = result + MORSE_TABLE[key];
+    }
+  }
+
+  return result;
 }
 
 module.exports = {
